@@ -29,10 +29,10 @@ import (
 )
 
 type IndexerConfig struct {
-	// Client is a Redis client representing a pool of zero or more underlying connections.
+	// Client is a Redis cmdable interface representing a pool of zero or more underlying connections.
 	// It's safe for concurrent use by multiple goroutines, which means is okay to pass
 	// an existed Client to create a new Indexer component.
-	Client *redis.Client
+	Client redis.Cmdable
 	// KeyPrefix prefix for each key, hset key would be KeyPrefix+Hashes.Key.
 	// If not set, make sure each key from DocumentToHashes contains same prefix, for ft.Create requires.
 	// see: https://redis.io/docs/latest/develop/interact/search-and-query/advanced-concepts/vectors/#create-a-vector-index
